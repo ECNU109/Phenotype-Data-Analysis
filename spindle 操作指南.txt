@@ -1,0 +1,15 @@
+psd.txt 的配置
+----------------------------------------------------------------
+EPOCH 
+MASK ifnot=NREM2
+RESTRUCTURE
+FILTER lower=0.3 upper=35
+ARTIFACTS mask
+SIGSTATS epoch mask threshold=3,3,3
+RESTRUCTURE
+PSD spectrum
+SPINDLES method=wavelet fc=10.895  ftr-dir=annots/  ftr=10.895hz
+-----------------------------------------------------------------
+./luna s.lst signal=EEG1 -o psd.db < psd.txt
+./destrat psd.db -x -r F CH -v PSD > res.psd
+destrat psd.db  -x -r F CH SPINDLE -v START STOP > res.psd
